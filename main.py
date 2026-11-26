@@ -23,6 +23,8 @@ def main() -> None:
         raise ValueError(f"line is {len(LINE)} chars, must be 1-200")
     if "\n" in LINE or "\r" in LINE or not LINE.strip():
         raise ValueError("line must be one non-blank line")
+    if LINE != LINE.strip():
+        raise ValueError("line must not start or end with whitespace")
     if encoded.decode("utf-8") != LINE:
         raise ValueError("line is not round-trip UTF-8")
     path = sys.argv[1] if len(sys.argv) > 1 else "/output/entry.txt"
